@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<input id="carid" type="text" >
+	<button onclick="getcalList()">Enter</button>
+	<button onclick="override()">update</button><br>
+	<br>
+
+	<table id="carTable" border="1">
+	</table>
+
+	<script>
+		var selectedindex = "";
+		var car = ["BMW", "FORD", "GM", "AUDI"];
+		var myFcn = function () {
+			text = `<tr>
+						<th>Car List</th>
+						<th>Buttons</th>
+						<th>Edit</th>
+					</tr>`;
+			for (var i = 0; i < car.length; i++) {
+				text += `<tr>
+							<td>
+								${car[i]} 
+							</td>
+							<td>
+								<Button onclick ="onlydelete(${i})">Delete</Button>
+							</td>
+							<td>
+								<Button onclick ="onlyedit(${i})">edit</Button>
+							</td>
+						</tr>`;
+			}
+			document.getElementById("carTable").innerHTML = text;
+		}
+
+		myFcn();
+
+		var override = function () {
+			// variable = value
+			car[selectedindex] = document.getElementById("carid").value;
+			// console.log(selectedindex);
+			myFcn();
+		};
+
+
+		var onlyedit = function (j) {
+			selectedindex = j;
+			console.log(car[j]);
+			document.getElementById("carid").value = car[j];
+		};
+
+
+		var onlydelete = function (a) {
+			car.splice(a, 1);
+			console.log(car);
+			myFcn();
+		};
+
+		var getcalList = function () {
+			var s = document.getElementById("carid").value;
+			
+			car.push(s);
+			console.log(car);
+			myFcn();
+		};
+
+		// GET
+		// ADD
+		// DELETE
+		// UPDATE
+		// Array methods
+	</script>
+</body>
+
+</html>
